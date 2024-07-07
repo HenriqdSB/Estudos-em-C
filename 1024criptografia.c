@@ -1,3 +1,4 @@
+//exercicio 1024 do beecrowd
 #include<stdio.h>
 #include<string.h>
 int main(void){
