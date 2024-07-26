@@ -1,10 +1,10 @@
+//programa simples que gera uma senha com o tamanho solicitado
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <ctype.h>
 #include <time.h>
 
-// tamanho minimo da senha
+// tamanho minimo ideal de senha
 //#define MIN_TAM_S 8
 
 
@@ -42,11 +42,11 @@ int main(void){
     return 0;
 }
 
-void gerarSenha(/*char senha[0]*/int tamanhoS){
+void gerarSenha(int tamanhoS){
     int i, c;
     for (i=0;i<tamanhoS;i++){
         c = rand() % 10 + 1;
-        // 0 para especiais[], 1 para numeros[], 2 para letras[]
+        // 1-2 para especiais[], 3-4 para numeros[], 5-10 para letras[]
         if(c <= 2){
             senhas[i] = especiais[rand() % sizeof(especiais)];
         }
@@ -54,6 +54,7 @@ void gerarSenha(/*char senha[0]*/int tamanhoS){
             senhas[i] = numeros[rand() % sizeof(numeros)];
         }
         else{
+            //decide se sera minuscula ou maiuscula
             c = rand() % 2;
             //maiuscula
             if(!c){
