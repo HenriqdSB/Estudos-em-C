@@ -19,10 +19,30 @@ void inserirNaLista(LEC *, int, int); // funcao para inserir os elementos na lis
 int recuperar(LEC , int ); // funcao que retorna o valor do nodo desejado com base na posicao inserida
 void retiraDaLista(LEC *, int ); // função que permite retirar um nodo da lista
 void destruirLista(LEC *); // funcao para excluir a lista
+void mostrarLista(LEC );
 
 // função principal MAIN
 int main(void){
-    
+    NODO *lista1;
+    int r;
+
+    criaLista(&lista1);
+    inserirNaLista(&lista1, 1, 44);
+    r = ehVazia(lista1);
+    printf("Lista esta vazia? %s\n\n", r?"sim":"nao");
+    inserirNaLista(&lista1, 2, 33);
+    inserirNaLista(&lista1, 3, 34);
+    inserirNaLista(&lista1, 4, 12);
+    inserirNaLista(&lista1, 2, 666); // testando inserção no meio da lista ok
+    inserirNaLista(&lista1, 6, 1);
+    mostrarLista(lista1);
+    retiraDaLista(&lista1, 1);
+    mostrarLista(lista1);
+    r = recuperar(lista1, 3);
+    printf("Valor encontrado: %d", r);
+
+
+    return 0;
 }
 
 void criaLista(LEC *lista){
@@ -146,7 +166,7 @@ void retiraDaLista(LEC *lista, int pos){
 
 }
 
-void destruir(LEC *lista){ // pode ser LEC lista tambem
+void destruirLista(LEC *lista){ // pode ser LEC lista tambem
     if(*lista)
     {
         LEC aux;
@@ -157,4 +177,15 @@ void destruir(LEC *lista){ // pode ser LEC lista tambem
         free(aux); // libera a memória do último nodo
         *lista = NULL; // ao final a lista está vazia apontando para NULL
     }
+}
+
+void mostrarLista(LEC lista){
+    LEC l = lista->next;
+
+    do{
+        printf("%3d -> ", l->inf);
+        l = l->next;
+    }while(l!=lista->next);
+
+    printf(".\n");
 }
