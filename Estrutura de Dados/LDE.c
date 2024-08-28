@@ -149,11 +149,49 @@ void destruir(ListaDE lista)
 // implementar um funcao para inverter a lista
 void inverte(ListaDE *lista)
 {
+    int t;
+    ListaDE aux;
+    aux = *lista;
+    t = tam(*lista);
+    if(*lista)
+    {
+       for (;t > 1; aux = aux->prox, t--);
+        *lista = aux;
+        while(aux)
+        {
+            aux->prox = aux->ant;
+            aux->ant = aux->prox;
+            aux = aux->prox;
+        } 
+    }
+}
 
+void mostrarLista(ListaDE lista){
+    ListaDE l = lista;
+
+    do{
+        printf("%3d -> ", l->inf);
+        l = l->prox;
+    }while(l);
+
+    printf(".\n");
 }
 
 // main
 int main(void){
+    ListaDE lista;
+
+    criarLista(&lista);
+    inserir(&lista, 1, 1);
+    inserir(&lista, 2, 2);
+    inserir(&lista, 3, 3);
+    inserir(&lista, 4, 4);
+    
+    mostrarLista(lista);
+
+    inverte(&lista);
+
+    mostrarLista(lista);
 
     return 0;
 }
